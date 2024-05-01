@@ -13,7 +13,7 @@ def sample_vacancies():
 
 def test_filter_vacancies(sample_vacancies):
     filtered_vacancies = filter_vacancies(sample_vacancies, 'Engineer')
-    assert filtered_vacancies is not None
+    assert filtered_vacancies == 1
     assert filtered_vacancies[0]['title'] == 'Software Engineer'
 
 
