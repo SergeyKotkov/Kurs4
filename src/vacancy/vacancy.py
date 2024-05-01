@@ -29,20 +29,15 @@ class Vacancy:
 
         :return: (str) строковое отображение объекта
         """
-        if self.salary_from == 0 and self.salary_to == 0 and self.currency is None:
-            return (f"\n{"-" * 50}\n\n"
-                    f"Название вакансии: {self.name}\n"
-                    f"Город: {self.city}\n"
-                    f"Заработная плата: Зарплата не указана...\n"
-                    f"Требования: {re.sub(r'<.*?>', '', self.requirements)}\n"
-                    f"Ссылка на вакансию: {self.link}")
-        else:
-            return (f"\n{"-" * 50}\n\n"
-                    f"Название вакансии: {self.name}\n"
-                    f"Город: {self.city}\n"
-                    f"Заработная плата: {self.salary_from}-{self.salary_to} {self.currency}.\n"
-                    f"Требования: {re.sub(r'<.*?>', '', self.requirements) if self.requirements else "Нету"}\n"
-                    f"Ссылка на вакансию: {self.link}")
+        salary_info = f"{self.salary_from}-{self.salary_to} {self.currency}" if self.salary_from != 0 or self.salary_to != 0 else "Зарплата не указана..."
+        requirements_info = re.sub(r'<.*?>', '', self.requirements) if self.requirements else "Нет требований"
+
+        return (f"\n{'—' * 50}\n\n"
+                f"Название вакансии: {self.name}\n"
+                f"Город: {self.city}\n"
+                f"Заработная плата: {salary_info}\n"
+                f"Требования: {requirements_info}\n"
+                f"Ссылка на вакансию: {self.link}")
 
     def __eq__(self, other: object) -> bool:
         """

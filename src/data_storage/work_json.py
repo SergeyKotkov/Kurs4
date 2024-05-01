@@ -7,36 +7,29 @@ class WorkJSON(WorkWithFile):
     """
     Класс для работы с JSON файлом
     """
+
     def add_vacancies(self, file: list[object, ...]) -> None:
+        list_vacancies = []
         """
         Функция принимает список объектов класса
         и записывает их в формате JSON
 
         :param file: (list) файл JSON
         """
-        list_vacancies = []
         for el in file:
-            if el.salary_from == 0 and el.salary_to == 0 and el.currency is None:
-                vacancies = {
-                    "name": el.name,
-                    "city": el.city,
-                    "salary": "Зарплата не указана...",
-                    "requirement": el.requirements,
-                    "url": el.link
-                }
-                list_vacancies.append(vacancies)
-
+            if el.salary_from == el.salary_to == 0:
+                salary = 'Зарплата не указана...'
             else:
-                vacancies = {
-                    "name": el.name,
-                    "city": el.city,
-                    "salary_from": el.salary_from,
-                    "salary_to": el.salary_to,
-                    "currency": el.currency,
-                    "requirement": el.requirements,
-                    "url": el.link
-                }
-                list_vacancies.append(vacancies)
+                salary = el.salary_from or el.salary_to
+
+            vacancies = {
+                "name": el.name,
+                "city": el.city,
+                "salary": salary,
+                "requirement": el.requirements,
+                "url": el.link
+            }
+            list_vacancies.append(vacancies)
 
         with open("./data/hh_vacancies.json", "w") as f:
             json.dump(list_vacancies, f, ensure_ascii=False, indent=4)

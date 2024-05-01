@@ -17,7 +17,7 @@ def user_interaction() -> None:
 
     hh_api = VacanciesHH()
 
-    hh_vacancies = hh_api.get_vacancies(search_query)
+    hh_vacancies = hh_api.get_vacancies
 
     vacancies_list = Vacancy.cast_to_object_list(hh_vacancies)
 
