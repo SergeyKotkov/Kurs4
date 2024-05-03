@@ -4,7 +4,6 @@ from src.data_storage.work_json import WorkJSON
 from src.utils.work_with_vacancies import filter_vacancies, get_vacancies_by_salary, sort_vacancies, \
     get_top_vacancies, print_vacancies
 
-
 def user_interaction() -> None:
     """
     Функция для работы с пользователем
@@ -17,13 +16,13 @@ def user_interaction() -> None:
 
     hh_api = VacanciesHH()
 
-    hh_vacancies = hh_api.get_vacancies
+    hh_vacancies = hh_api.get_vacancies(keyword=search_query)
 
     vacancies_list = Vacancy.cast_to_object_list(hh_vacancies)
 
     save_json = WorkJSON()
     save_json.add_vacancies(vacancies_list)
-    save_json.del_vacancies()
+    # save_json.del_vacancies()
 
     filtered_vacancies = filter_vacancies(vacancies_list, filter_word)
 

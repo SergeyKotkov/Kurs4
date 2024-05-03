@@ -19,7 +19,7 @@ class VacanciesHH(WorkWithAPIService):
 
         return response.status_code
 
-    def get_vacancies(self, **params):
+    def get_vacancies(self, keyword, page=None, salary=None):
         """
         Функция возвращает вакансии сервиса hh.ru
 
@@ -35,7 +35,16 @@ class VacanciesHH(WorkWithAPIService):
         :return: (str) файл json
         """
         url = 'https://api.hh.ru/vacancies'
-        response = requests.get(url, params=params)
+
+        params = {
+            'text': keyword,
+            'per_page': page,
+            'salary': salary,
+
+        }
+        response = requests.get(url.strip(), params=params)
+
+
         if not response.ok:
             print(f'Connection error, status code {response.status_code}')
             return []

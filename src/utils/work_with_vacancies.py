@@ -1,4 +1,8 @@
+import sys
+
+
 def filter_vacancies(list_classes: list[object, ...], word: str | None) -> list[object, ...] | None:
+    word = word + ','
     try:
         if word:
             if "," not in word:
@@ -20,6 +24,7 @@ def filter_vacancies(list_classes: list[object, ...], word: str | None) -> list[
             if len(list_filtered_classes) < 1:
                 raise ValueError(f"По заданным ключевым словам ({name}, {city.capitalize()}) не найдено ни одного совпадения")
 
+
             return list_filtered_classes
 
         else:
@@ -27,7 +32,7 @@ def filter_vacancies(list_classes: list[object, ...], word: str | None) -> list[
 
     except ValueError as e:
         print(e)
-        return None
+        sys.exit(1)
 
 
 def get_vacancies_by_salary(list_classes: list[object, ...], salary_range: str) \
@@ -41,6 +46,7 @@ def get_vacancies_by_salary(list_classes: list[object, ...], salary_range: str) 
     :param salary_range: (str) строковое отображение диапазона зарплат
     :return: (list[object, ...]) список отфильтрованных объектов по переданной зарплате
     """
+    salary_range = salary_range + '-'
     try:
         list_filtered_classes = []
         if salary_range:
@@ -60,6 +66,7 @@ def get_vacancies_by_salary(list_classes: list[object, ...], salary_range: str) 
                         raise NameError(f"\nПо данному диапазону зарплат \n"
                                         f"( от - {salary_from}, до - {salary_to}, валюта - {currency}. )\n"
                                         f"не найдено ни одного совпадения ...")
+
 
                 if salary_from != "" and salary_to != "" and currency == "":
                     for el in list_classes:

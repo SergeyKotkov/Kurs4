@@ -31,7 +31,7 @@ class WorkJSON(WorkWithFile):
             }
             list_vacancies.append(vacancies)
 
-        with open("./data/hh_vacancies.json", "w") as f:
+        with open("./data/hh_vacancies.json", "w", encoding='utf-8') as f:
             json.dump(list_vacancies, f, ensure_ascii=False, indent=4)
 
     def print_vacancies(self) -> None:
